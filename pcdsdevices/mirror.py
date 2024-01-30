@@ -1215,6 +1215,30 @@ pitch: ({self.pitch.prefix})
 """
 
 
+class FFMirrorHE(FFMirror):
+    """
+    Fixed Focus Kirkpatrick-Baez Mirror.
+
+    1st gen Toyama designs with LCLS-II Beckhoff motion architecture.
+
+    With cooling and pressure meters installed.
+
+    Currently (01/29/2024) services: mr2k2.
+
+    Parameters
+    ----------
+    prefix : str
+        Base PV for the mirror.
+
+    name : str
+        Alias for the device.
+    """
+    # Cooling
+    cool_flow1 = Cpt(EpicsSignalRO, ':FWM:1_RBV', kind='normal')
+    cool_flow2 = Cpt(EpicsSignalRO, ':FWM:2_RBV', kind='normal')
+    cool_press = Cpt(EpicsSignalRO, ':PRSM:1_RBV', kind='normal')
+
+
 @reorder_components(
     end_with=['x_enc_rms', 'y_enc_rms', 'z_enc_rms', 'pitch_enc_rms']
 )
